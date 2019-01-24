@@ -1,0 +1,5 @@
+{
+    "name": "puppeteer-example",
+    "description": "screenshot by puppeteer which deploy on fc.",
+    "copyOnlyPaths": [ ".fun", "node_modules", ".env" ]
+}

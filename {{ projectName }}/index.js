@@ -15,7 +15,7 @@ module.exports.initializer = (context, callback) => {
 
 module.exports.handler = (event, context, callback) => {
   let evtStr = event.toString();
-  let pageUrl = evtStr !== '{}' ? evtStr : 'https://www.aliyun.com';
+  let pageUrl = (evtStr.length !== 0 && evtStr.indexOf('{') !== 0) ? evtStr : 'https://www.aliyun.com';
   console.log(`page url: ${pageUrl}`);
   screenshot(pageUrl)
     .then(file => uploadToOss(context, file))
