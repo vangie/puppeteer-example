@@ -15,7 +15,7 @@ Resources:
         Runtime: nodejs8
         CodeUri: './'
         MemorySize: 768
-        Timeout: 10
+        Timeout: 20
         EnvironmentVariables:
           CHROME_BUCKET: chrome-headless
           CHROME_REGION: oss-cn-shanghai
