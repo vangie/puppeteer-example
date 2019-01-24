@@ -1,0 +1,32 @@
+{
+  "name": "puppeteer-example",
+  "version": "1.0.0",
+  "description": "该项目模板是一个基于 puppeteer 的截图工具，该项目是一个 fun 工程，借助 fun 工具进行依赖安装，上传 headless_shell 大文件到 OSS，并最终部署到阿里云的函数计算平台，作为一个 serverless 的截图服务。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "puppeteer": "^1.4.0",
+    "tar": "^4.4.4"
+  },
+  "author": "Vangie Du",
+  "license": "ISC",
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vangie/puppeteer-example.git"
+  },
+  "keywords": [
+    "puppeteer",
+    "fun",
+    "fc"
+  ],
+  "bugs": {
+    "url": "https://github.com/vangie/puppeteer-example/issues"
+  },
+  "homepage": "https://github.com/vangie/puppeteer-example#readme"
+}

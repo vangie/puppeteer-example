@@ -1,0 +1,21 @@
+ROSTemplateFormatVersion: '2015-09-01'
+Transform: 'Aliyun::Serverless-2018-04-03'
+Resources:
+  puppeteer:
+    Type: 'Aliyun::Serverless::Service'
+    Properties:
+      Description: 'helloworld'
+      Policies:
+        - AliyunOSSFullAccess
+    html2png:
+      Type: 'Aliyun::Serverless::Function'
+      Properties:
+        Handler: index.handler
+        Initializer: index.initializer
+        Runtime: nodejs8
+        CodeUri: './'
+        MemorySize: 768
+        Timeout: 10
+        EnvironmentVariables:
+          CHROME_BUCKET: chrome-headless
+          CHROME_REGION: oss-cn-shanghai
