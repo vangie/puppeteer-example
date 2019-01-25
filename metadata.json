@@ -10,7 +10,7 @@
         {
             "type": "list",
             "name": "region",
-            "message": "Please select a region?",
+            "message": "Please select a region of oss?",
             "default": "cn-hangzhou",
             "choices": ["cn-qingdao", "cn-beijing", "cn-zhangjiakou", 
                 "cn-hangzhou", "cn-shanghai", "cn-shenzhen" , 
@@ -21,12 +21,12 @@
         {
             "type": "input",                               
             "name": "accessKeyId",                                
-            "message": "Please input a oss accessKeyId for upload?"
+            "message": "Please input a accessKeyId for oss upload?"
         },
         {
             "type": "input",                               
             "name": "accessKeySecret",                                
-            "message": "Please input a oss accessKeySecret for upload?"
+            "message": "Please input a accessKeySecret for oss upload?"
         }
    ],
     "copyOnlyPaths": [ ".fun", "node_modules", ".env.bak" ]
