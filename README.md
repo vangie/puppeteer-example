@@ -42,7 +42,7 @@ $ fun init vanige/puppeteer-example
 
 上面会提示
 
-1. 输入一个 OSS 的 BUCKET，注意 OSS Bucket 是全球唯一的。
+1. 输入一个 OSS 的 BUCKET，注意 OSS Bucket 是全球唯一的，上面的 chrome-headless 已经被占用了，请换一个新的名称或者一个已经创建好的（已经创建好的，请确保 region 一致）。
 2. 然后选择一个 OSS 的 Region，请保持和部署函数计算 Region 一致
 3. 输入一个具备 OSS 写权限的秘钥。
 
