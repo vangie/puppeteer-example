@@ -21,12 +21,12 @@
         {
             "type": "input",                               
             "name": "accessKeyId",                                
-            "message": "Please input a accessKeyId for oss upload?"
+            "message": "Please input an accessKeyId for oss uploading?"
         },
         {
             "type": "input",                               
             "name": "accessKeySecret",                                
-            "message": "Please input a accessKeySecret for oss upload?"
+            "message": "Please input an accessKeySecret for oss uploading?"
         }
    ],
     "copyOnlyPaths": [ ".fun", "node_modules", ".env.bak" ]
