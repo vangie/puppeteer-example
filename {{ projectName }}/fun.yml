@@ -7,5 +7,4 @@ tasks:
   - shell: export $(egrep -v '^#' .env | xargs); bash -c './aliyun oss mb oss://${BUCKET}'
   - shell: export $(egrep -v '^#' .env | xargs); bash -c './aliyun oss cp headless_shell.tar.gz oss://${BUCKET}/headless_shell.tar.gz -f'
   - shell: rm -f ./aliyun ./headless_shell.tar.gz
-  - shell: npm install
-  - shell: rm -rf ./node_modules/puppeteer/.local-chromium
+  - shell: PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true npm install --production
