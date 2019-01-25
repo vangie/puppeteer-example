@@ -33,29 +33,18 @@ Windows 和 Linux 用户安装请参考：
 使用 fun init 命令可以快捷的将本模板项目初始化到本地。
 
 ```bash
-fun init vanige/puppeteer-example
+$ fun init vanige/puppeteer-example
+? Please input oss bucket to upload chrome shell? chrome-headless
+? Please select a region? cn-hangzhou
+? Please input oss accessKeyId for upload? xxxxxxxxxxxKbBS
+? Please input oss accessKeySecret for upload? xxxxxxxxxxxx5ZgM
 ```
 
-## 修改配置文件
+上面会提示
 
-在项目目录下创建 .env 文件，内容如下
-
-```bash
-# OSS Bucket 名称，由于 OSS Bucket 是全球唯一的，所以请换一个为被占用的名称，或者设定成一个已有的 BUCKET
-BUCKET=chrome-headless
-# OSS Region，这个 region 需要和最终部署的函数计算 region 保持一致
-REGION=cn-shanghai
-# 具备 OSS 写权限的 Access Key
-ACCESS_KEY_ID=
-ACCESS_KEY_SECRET=
-```
-
-修改 template.yml 文件的 `CHROME_BUCKET` 和 `CHROME_REGION` 字段。注意和上面的 .env 文件中的对应字段值保持一致。对应`CHROME_REGION`值的 `oss-` 前缀是必须的。
-
-```bash
-CHROME_BUCKET: chrome-headless
-CHROME_REGION: oss-cn-shanghai
-```
+1. 输入一个 OSS 的 BUCKET，注意 OSS Bucket 是全球唯一的。
+2. 然后选择一个 OSS 的 Region，请保持和部署函数计算 Region 一致
+3. 输入一个具备 OSS 写权限的秘钥。
 
 ## 安装依赖
 

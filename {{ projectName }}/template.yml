@@ -17,5 +17,5 @@ Resources:
         MemorySize: 768
         Timeout: 20
         EnvironmentVariables:
-          CHROME_BUCKET: chrome-headless
-          CHROME_REGION: oss-cn-shanghai
+          CHROME_BUCKET: {{ bucket }}
+          CHROME_REGION: oss-{{ region }}

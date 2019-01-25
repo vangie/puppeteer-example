@@ -1,5 +1,33 @@
 {
     "name": "puppeteer-example",
     "description": "screenshot by puppeteer which deploy on fc.",
-    "copyOnlyPaths": [ ".fun", "node_modules", ".env" ]
+    "userPrompt": [                                        
+        {
+            "type": "input",                               
+            "name": "bucket",                                
+            "message": "Please input a oss bucket name to upload chrome shell?"
+        },
+        {
+            "type": "list",
+            "name": "region",
+            "message": "Please select a region?",
+            "default": "cn-hangzhou",
+            "choices": ["cn-qingdao", "cn-beijing", "cn-zhangjiakou", 
+                "cn-hangzhou", "cn-shanghai", "cn-shenzhen" , 
+                "cn-hongkong", "ap-southeast-1", "ap-southeast-2", 
+                "ap-northeast-1", "us-west-1", "us-east-1", 
+                "eu-central-1", "ap-south-1"]
+        },
+        {
+            "type": "input",                               
+            "name": "accessKeyId",                                
+            "message": "Please input a oss accessKeyId for upload?"
+        },
+        {
+            "type": "input",                               
+            "name": "accessKeySecret",                                
+            "message": "Please input a oss accessKeySecret for upload?"
+        }
+   ],
+    "copyOnlyPaths": [ ".fun", "node_modules", ".env.bak" ]
 }

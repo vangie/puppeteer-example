@@ -2,4 +2,4 @@ aliyun
 headless_shell.tar.gz
 .fun/
 node_modules
-.env
+.env.bak
