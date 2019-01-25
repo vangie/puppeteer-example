@@ -33,7 +33,7 @@ Windows 和 Linux 用户安装请参考：
 使用 fun init 命令可以快捷的将本模板项目初始化到本地。
 
 ```bash
-$ fun init vanige/puppeteer-example
+$ fun init vangie/puppeteer-example
 ? Please input oss bucket to upload chrome shell? chrome-headless
 ? Please select a region? cn-hangzhou
 ? Please input oss accessKeyId for upload? xxxxxxxxxxxKbBS
