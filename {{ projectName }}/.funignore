@@ -2,5 +2,5 @@ fun.yml
 template.yml
 aliyun
 headless_shell.tar.gz
-.env
+env
 readme.md
