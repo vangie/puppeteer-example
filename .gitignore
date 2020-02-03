@@ -1,6 +1,6 @@
-aliyun
-headless_shell.tar.gz
+.DS_Store
+.vscode/
 .fun/
-node_modules
-.env.bak
+node_modules/
 .env
+headless_shell.tar.gz

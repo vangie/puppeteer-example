@@ -7,14 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "puppeteer": "^1.18.1",
-    "tar": "^4.4.4"
+    "puppeteer": "^1.18.1"
   },
   "author": "Vangie Du",
   "license": "ISC",
-  "directories": {
-    "lib": "lib"
-  },
   "devDependencies": {},
   "repository": {
     "type": "git",

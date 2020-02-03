@@ -1,7 +1,0 @@
-# OSS Bucket 名称，由于 OSS Bucket 是全球唯一的，所以请换一个为被占用的名称，或者设定成一个已有的 BUCKET
-BUCKET={{ bucket }}
-# OSS Region，这个 region 需要和最终部署的函数计算 region 保持一致
-REGION={{ region }}
-# 具备 OSS 写权限的 Access Key
-ACCESS_KEY_ID={{ accessKeyId }}
-ACCESS_KEY_SECRET={{ accessKeySecret }}

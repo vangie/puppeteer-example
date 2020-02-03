@@ -4,18 +4,25 @@ Resources:
   puppeteer:
     Type: 'Aliyun::Serverless::Service'
     Properties:
-      Description: 'helloworld'
-      Policies:
-        - AliyunOSSFullAccess
+      Description: helloworld
+      NasConfig: Auto
     html2png:
       Type: 'Aliyun::Serverless::Function'
       Properties:
         Handler: index.handler
         Initializer: index.initializer
         Runtime: nodejs8
-        CodeUri: './'
+        CodeUri: ./
         MemorySize: 768
-        Timeout: 20
+        Timeout: 360
         EnvironmentVariables:
-          CHROME_BUCKET: {{ bucket }}
-          CHROME_REGION: oss-{{ region }}
+          LD_LIBRARY_PATH: >-
+            /mnt/auto/root/usr/lib:/mnt/auto/root/usr/lib/x86_64-linux-gnu:/mnt/auto/root/lib/x86_64-linux-gnu:/mnt/auto/root/usr/lib64
+          NODE_PATH: '/usr/local/lib/node_modules:/mnt/auto/node_modules'
+      Events:
+        httpTrigger:
+          Type: HTTP
+          Properties:
+            AuthType: ANONYMOUS
+            Methods:
+              - GET

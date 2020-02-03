@@ -8,7 +8,6 @@
 
 * [Docker](https://www.docker.com/)
 * [Fun](https://github.com/aliyun/fun)
-* [Fcli](https://github.com/aliyun/fcli)
 
 Fun 和 Fcli 工具依赖于 docker 来模拟本地环境。
 
@@ -33,71 +32,91 @@ Windows 和 Linux 用户安装请参考：
 使用 fun init 命令可以快捷的将本模板项目初始化到本地。
 
 ```bash
-$ fun init vangie/puppeteer-example
-? Please input oss bucket to upload chrome shell? chrome-headless
-? Please select a region? cn-hangzhou
-? Please input oss accessKeyId for upload? xxxxxxxxxxxKbBS
-? Please input oss accessKeySecret for upload? xxxxxxxxxxxx5ZgM
+fun init vangie/puppeteer-example
 ```
-
-上面会提示
-
-1. 输入一个 OSS 的 BUCKET，注意 OSS Bucket 是全球唯一的，上面的 chrome-headless 已经被占用了，请换一个新的名称或者一个已经创建好的（已经创建好的，请确保 region 一致）。
-2. 然后选择一个 OSS 的 Region，请保持和部署函数计算 Region 一致
-3. 输入一个具备 OSS 写权限的秘钥。
 
 ## 安装依赖
 
 ```bash
-$ fun install
-skip pulling image aliyunfc/runtime-nodejs8:build-1.2.0...
-Task => [UNNAMED]
-     => apt-get update (if need)
-     => apt-get install -y -d -o=dir::cache=/code/.fun/tmp libnss3
-     => bash -c 'for f in $(ls /code/.fun/tmp/archives/*.deb); do dpkg -x $f /code/.fun/root; done;'
-     => bash -c 'rm -rf /code/.fun/tmp/archives'
-Task => [UNNAMED]
-     => bash -c  'curl -L https://github.com/muxiangqiu/puppeteer-fc-starter-kit/raw/master/chrome/headless_shell.tar.gz --output headless_shell.tar.gz'
-...
+fun install
 ```
 
-fun install 会执行 fun.yml 文件里的任务，这些任务会：
+`fun install` 会执行 Funfile 文件里的指令，依次执行如下任务：
 
-1. 安装 puppeteer 依赖的 .so 文件；
-2. 将 puppeteer 依赖的 chrome headless 二进制文件上传到 OSS；
+1. 安装 chrome headless 二进制文件；
+2. 安装 puppeteer 依赖的 apt 包；
 3. 安装 npm 依赖。
 
 ## 部署
 
+同步大文件到 nas 盘
+
+```bash
+fun nas sync
+```
+
+部署代码
+
 ```bash
 $ fun deploy
-using region: cn-shanghai
-using accountId: ***********4733
-using accessKeyId: ***********KbBS
-using timeout: 60
+using template: template.yml
+using region: cn-hangzhou
+using accountId: ***********3743
+using accessKeyId: ***********Ptgk
+using timeout: 600
 
 Waiting for service puppeteer to be deployed...
+        make sure role 'aliyunfcgeneratedrole-cn-hangzhou-puppeteer' is exist
+        role 'aliyunfcgeneratedrole-cn-hangzhou-puppeteer' is already exist
+        attaching police 'AliyunECSNetworkInterfaceManagementAccess' to role: aliyunfcgeneratedrole-cn-hangzhou-puppeteer
+        attached police 'AliyunECSNetworkInterfaceManagementAccess' to role: aliyunfcgeneratedrole-cn-hangzhou-puppeteer
+        using 'VpcConfig: Auto', Fun will try to generate related vpc resources automatically
+                vpc already generated, vpcId is: vpc-bp1wv9al02opqahkizmvr
+                vswitch already generated, vswitchId is: vsw-bp1kablus0jrcdeth8v35
+                security group already generated, security group is: sg-bp1h2swzeb5vgjfu6gpo
+        generated auto VpcConfig done:  {"vpcId":"vpc-bp1wv9al02opqahkizmvr","vswitchIds":["vsw-bp1kablus0jrcdeth8v35"],"securityGroupId":"sg-bp1h2swzeb5vgjfu6gpo"}
+        using 'NasConfig: Auto', Fun will try to generate related nas file system automatically
+                nas file system already generated, fileSystemId is: 0825a4a395
+                nas file system mount target is already created, mountTargetDomain is: 0825a4a395-rrf16.cn-hangzhou.nas.aliyuncs.com
+        generated auto NasConfig done:  {"UserId":10003,"GroupId":10003,"MountPoints":[{"ServerAddr":"0825a4a395-rrf16.cn-hangzhou.nas.aliyuncs.com:/puppeteer","MountDir":"/mnt/auto"}]}
+        Checking if nas directories /puppeteer exists, if not, it will be created automatically
+        Checking nas directories done ["/puppeteer"]
         Waiting for function html2png to be deployed...
-         Waiting for packaging function html2png code...
-         package function html2png code done
+                Waiting for packaging function html2png code...
+                The function html2png has been packaged. A total of 7 files files were compressed and the final size was 2.56 KB
+                Waiting for HTTP trigger httpTrigger to be deployed...
+                triggerName: httpTrigger
+                methods: [ 'GET' ]
+                url: https://xxxxxx.cn-hangzhou.fc.aliyuncs.com/2016-08-15/proxy/puppeteer/html2png/
+                Http Trigger will forcefully add a 'Content-Disposition: attachment' field to the response header, which cannot be overwritten 
+                and will cause the response to be downloaded as an attachment in the browser. This issue can be avoided by using CustomDomain.
+
+                trigger httpTrigger deploy success
         function html2png deploy success
 service puppeteer deploy success
+
+
+===================================== Tips for nas resources ==================================================
+Fun has detected the .nas.yml file in your working directory, which contains the local directory:
+
+        /Users/vangie/Workspace/puppeteer-example/{{ projectName }}/.fun/root
+        /Users/vangie/Workspace/puppeteer-example/{{ projectName }}/node_modules
+  
+The above directories will be automatically ignored when 'fun deploy'.
+Any content of the above directories changes，you need to use 'fun nas sync' to sync local resources to remote.
+===============================================================================================================
 ```
 
-## 执行
+## 验证
 
 ```bash
-$ fcli function invoke -s puppeteer -f html2png
-The screenshot has been uploaded to http://chrome-headless.oss-cn-shanghai.aliyuncs.com/screenshot.png
+curl https://xxxxxx.cn-hangzhou.fc.aliyuncs.com/2016-08-15/proxy/puppeteer/html2png/ > screenshot.png
 ```
-
-打开上面的返回链接，看到截取出来的是全屏滚动的长图，考虑的篇幅下面只截取了部分：
-![image](https://yqfile.alicdn.com/e2d12dfbee485cac743bf179d1093d0d1a2545f4.png)
 
 如果想换一个网址，可以使用如下命令格式
 
 ```bash
-fcli function invoke -s puppeteer -f html2png --event-str 'http://www.alibaba.com'
+curl https://xxxxxx.cn-hangzhou.fc.aliyuncs.com/2016-08-15/proxy/puppeteer/html2png/?url=http://www.alibaba.com > screenshot.png
 ```
 
 ## 调试
@@ -105,8 +124,18 @@ fcli function invoke -s puppeteer -f html2png --event-str 'http://www.alibaba.co
 如果需要在本地调试代码，可以使用如下命令
 
 ```bash
-fun local invoke html2png <<<'http://www.alibaba.com'
+$ fun local start
+using template: template.yml
+HttpTrigger httpTrigger of puppeteer/html2png was registered
+        url: http://localhost:8000/2016-08-15/proxy/puppeteer/html2png
+        methods: [ 'GET' ]
+        authType: ANONYMOUS
+
+
+function compute app listening on port 8000!
 ```
+
+浏览器打开 http://localhost:8000/2016-08-15/proxy/puppeteer/html2png 即可。
 
 ## 参考阅读
 

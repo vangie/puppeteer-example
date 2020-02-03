@@ -1,0 +1,4 @@
+RUNTIME nodejs8
+RUN mkdir -p .fun/root/bin
+RUN curl -L https://fc-demo-public.oss-cn-hangzhou.aliyuncs.com/fun/examples/headless_shell.tar.gz \
+    | tar -C .fun/root/bin -zxvf -
