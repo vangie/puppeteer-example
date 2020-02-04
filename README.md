@@ -1,6 +1,6 @@
 # puppeteer 模板项目
 
-该项目模板是一个基于 puppeteer 的截图工具，该项目是一个 fun 工程，借助 fun 工具进行依赖安装，上传 headless_shell 大文件到 OSS，并最终部署到阿里云的函数计算平台，作为一个 serverless 的截图服务。
+该项目模板是一个基于 puppeteer 的截图工具，该项目是一个 fun 工程，借助 fun 工具进行依赖安装，上传 headless_shell 大文件到 NAS，并最终部署到阿里云的函数计算平台，作为一个 serverless 的截图服务。
 
 ## 依赖工具
 
@@ -9,7 +9,7 @@
 * [Docker](https://www.docker.com/)
 * [Fun](https://github.com/aliyun/fun)
 
-Fun 和 Fcli 工具依赖于 docker 来模拟本地环境。
+Fun 工具依赖于 docker 来模拟本地环境。
 
 对于 MacOS 用户可以使用 [homebrew](https://brew.sh/) 进行安装：
 
@@ -17,7 +17,6 @@ Fun 和 Fcli 工具依赖于 docker 来模拟本地环境。
 brew cask install docker
 brew tap vangie/formula
 brew install fun
-brew install fcli
 ```
 
 Windows 和 Linux 用户安装请参考：
@@ -113,11 +112,17 @@ Any content of the above directories changes，you need to use 'fun nas sync' to
 curl https://xxxxxx.cn-hangzhou.fc.aliyuncs.com/2016-08-15/proxy/puppeteer/html2png/ > screenshot.png
 ```
 
+如果不传递查询参数，默认会截取阿里云的首页
+
+![](https://img.alicdn.com/tfs/TB11PapuVP7gK0jSZFjXXc5aXXa-897-423.png)
+
 如果想换一个网址，可以使用如下命令格式
 
 ```bash
 curl https://xxxxxx.cn-hangzhou.fc.aliyuncs.com/2016-08-15/proxy/puppeteer/html2png/?url=http://www.alibaba.com > screenshot.png
 ```
+
+![](https://img.alicdn.com/tfs/TB18jypuVP7gK0jSZFjXXc5aXXa-692-327.png)
 
 ## 调试
 
