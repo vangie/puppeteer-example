@@ -15,6 +15,7 @@ Resources:
         CodeUri: ./
         MemorySize: 768
         Timeout: 360
+        InitializationTimeout: 60
         EnvironmentVariables:
           LD_LIBRARY_PATH: >-
             /mnt/auto/root/usr/lib:/mnt/auto/root/usr/lib/x86_64-linux-gnu:/mnt/auto/root/lib/x86_64-linux-gnu:/mnt/auto/root/usr/lib64
