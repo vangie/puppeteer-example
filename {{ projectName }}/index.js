@@ -1,4 +1,3 @@
-const fs = require('fs');
 const puppeteer = require('puppeteer');
 
 let browser;
@@ -29,21 +28,18 @@ const screenshot = async (url) => {
   const page = await browser.newPage();
   const outputFile = '/tmp/screenshot.png';
   await page.goto(url);
-  await page.screenshot({
-    path: outputFile,
-    fullPage: true
-  });
-  console.log(`The screenshot for url ${url} saved to ${outputFile}`);
+  const buffer = await page.screenshot();
+  console.log(`The screenshot for url ${url} captured in buffer`);
   page.close();
-  return outputFile;
+  return buffer;
 };
 
 module.exports.handler = async (req, resp, context) => {
   const pageUrl = req.queries["url"] || 'https://www.aliyun.com';
   console.log(`page url: ${pageUrl}`);
-  const file = await screenshot(pageUrl);
+  const buffer = await screenshot(pageUrl);
   const filename = "screenshot.png";
   resp.setHeader('Context-Type', 'application/octet-stream');
   resp.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
-  resp.send(fs.createReadStream(file));
+  resp.send(buffer);
 }
